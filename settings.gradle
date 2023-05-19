@@ -1,3 +1,4 @@
 rootProject.name = 'otus_java_2023_04'
 include 'hw01-gradle'
+include 'w02-gradle'
 
