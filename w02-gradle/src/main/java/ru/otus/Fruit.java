@@ -1,6 +1,6 @@
 package ru.otus;
 //фрукт
-public abstract class Fruit {
+public class Fruit {
 
     private final float weight;
 

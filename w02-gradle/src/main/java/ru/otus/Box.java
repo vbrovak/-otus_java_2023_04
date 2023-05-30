@@ -1,37 +1,41 @@
 package ru.otus;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Box {
-     private ArrayList<Fruit> product = new ArrayList<>();
-     static final String ERROR_MSG = "Ошибка ! Смешивать разные товары запрещено, используйте другой товар или коробку!";
+public class Box<T extends Fruit> {
+    private final List<T> products = new ArrayList<>();
+    private String fruitName;
+
+    public String getFruitName() {
+        return fruitName;
+    }
+
+    public Box(String fruitName) {
+        this.fruitName = fruitName;
+    }
 
     public Box() {
-        ArrayList<Fruit> product = new ArrayList<>();
+    }
+
+    public List<T> getProducts() {
+        return products;
     }
 
     //  общий вес коробки - сумма всего что положат
     public double getWeight() {
-           double sumWeightProducts = 0.0f;
-        for (Fruit e : product) {
+        double sumWeightProducts = 0.0f;
+        for (Fruit e : products) {
             sumWeightProducts += e.getWeight();
         }
         return sumWeightProducts;
     }
 
-    public ArrayList<Fruit> getProduct() {
-        return product;
+    // Добавление фрукта
+    public void add(T fruit) {
+        products.add(fruit);
     }
 
-    // Добавление, с проверкой на тип
-    public void add(Fruit fruit) {
-        if (product.size() > 1) {
-            if (isProductsFruitsComparable(fruit)) {
-                throw new BoxException(ERROR_MSG);
-            }
-        }
-        product.add(0, fruit);
-    }
     // метод сравнения двух коробок по весу
     public boolean compare(Box other) {
         // Math.abs(f1 - f2) < THRESHOLD
@@ -44,22 +48,13 @@ public class Box {
     }
 
     // перекладка
-    public void MoveFruitsTo(Box box2) throws BoxException {
-
-        if (isProductsFruitsComparable(box2)) {
-            throw new BoxException(ERROR_MSG);
+    public void moveFruitsTo(Box box2) {
+        if ((box2.fruitName.equals(this.fruitName)) || box2.fruitName.equals("Fruits")) {
+            for (int i = products.size() - 1; i >= 0; i--) {
+                box2.getProducts().add(products.get(i));
+                products.remove(i);
+            }
         }
-        for (int i = product.size() - 1; i >= 0; i--) {
-            box2.getProduct().add(product.get(i));
-            product.remove(i);
-        }
-    }
 
-    public boolean isProductsFruitsComparable(Box otherBox) {
-        return product.get(0).getClass() != otherBox.getProduct().get(0).getClass();
-    }
-
-    public boolean isProductsFruitsComparable(Fruit fruit) {
-        return product.get(0).getClass() != fruit.getClass();
     }
 }
