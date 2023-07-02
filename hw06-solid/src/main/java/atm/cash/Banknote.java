@@ -9,11 +9,8 @@ public enum Banknote {
     N5000(5000),
     WRONG(123);
 
+    @lombok.Getter
     private int value;
-
-    public int getValue() {
-        return value;
-    }
 
     Banknote(int value) {
         this.value = value;

@@ -29,16 +29,16 @@ public class Atm {
         this.cellList = cellList;
     }
 
-    public boolean deposit(Banknote banknote, int count) {
-        return depositCommand.execute(cellList, banknote, count);
+    public boolean cashDeposit(Banknote banknote, int count) {
+        return depositCommand.executeCalcAndPrintBalance(cellList, banknote, count);
     }
 
-    public int info() {
-        return infoCommand.execute(cellList);
+    public int infoPrintAtm() {
+        return infoCommand.executeCalcAndPrintBalance(cellList);
     }
 
     public List<Banknote> withdraw(int sum) {
-        return withdrawCommand.execute(cellList, sum);
+        return withdrawCommand.executeCalcAndPrintBalance(cellList, sum);
     }
 
     @Override

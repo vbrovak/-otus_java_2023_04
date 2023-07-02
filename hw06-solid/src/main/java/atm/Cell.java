@@ -1,35 +1,32 @@
 package atm;
 
 import atm.cash.Banknote;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 public class Cell {
+    @lombok.Getter
     private final Banknote banknote;
-    private int count;
+    private int countBill;
 
-    public Cell(Banknote banknote, int count) {
-        this.banknote = banknote;
-        this.count = count;
+    public int getCountBill() {
+        return countBill;
     }
 
-    public Banknote getBanknote() {
-        return banknote;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        if (count > 0) {
-            this.count += count;
-        } else System.out.println("Количество купюр должно быть > 0");
+    public void checkAndChangeCountBills(int countBill) {
+        if (countBill > 0) {
+            this.countBill += countBill;
+        } else {
+            System.out.println("Количество купюр должно быть > 0");
+        }
+        ;
     }
 
     @Override
     public String toString() {
         return "Cell{" +
                 "banknote=" + banknote +
-                ", count=" + count +
+                ", count=" + countBill +
                 '}';
     }
 }

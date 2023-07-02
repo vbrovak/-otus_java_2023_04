@@ -13,17 +13,17 @@ public class Main {
         cells.add(new Cell(Banknote.N500, 1));
         var atm = new Atm(cells);
 
-        atm.deposit(Banknote.N1000, 1);//balance 1900
-        atm.deposit(Banknote.N1000, -1);//balance 1900
+        atm.cashDeposit(Banknote.N1000, 1);//balance 1900
+        atm.cashDeposit(Banknote.N1000, -1);//balance 1900
         atm.withdraw(500);
-        atm.info();//balance 1400
-        atm.deposit(Banknote.N5000, 1);
-        atm.info(); //balance 6400
+        atm.infoPrintAtm();//balance 1400
+        atm.cashDeposit(Banknote.N5000, 1);
+        atm.infoPrintAtm(); //balance 6400
         atm.withdraw(10000);//Недостаточно средств, balance 6400
         atm.withdraw(2000);//Нет подходящих купюр, balance 6400
-        atm.deposit(Banknote.N2000, 1);
-        atm.info(); //balance 8400
+        atm.cashDeposit(Banknote.N2000, 1);
+        atm.infoPrintAtm(); //balance 8400
         atm.withdraw(2000);
-        atm.info();//balance 6400
+        atm.infoPrintAtm();//balance 6400
     }
 }

@@ -1,9 +1,6 @@
 import atm.Atm;
 import atm.Cell;
 import atm.cash.Banknote;
-import atm.command.DepositCommand;
-import atm.command.InfoCommand;
-import atm.command.WithdrawCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,13 +27,13 @@ public class AtmTests {
     @Test
     @DisplayName("выдавать сумму остатка денежных средств")
     void testBalance() {
-        assertThat(atm.info()).isEqualTo(400);
+        assertThat(atm.infoPrintAtm()).isEqualTo(400);
     }
 
     @Test
     @DisplayName("отказывать в приеме купюры неподдерживаемого номинала")
     void testWrongNominal() {
-        assertThat(atm.deposit(Banknote.WRONG, 1)).isFalse();
+        assertThat(atm.cashDeposit(Banknote.WRONG, 1)).isFalse();
     }
 
     @Test
@@ -48,14 +45,14 @@ public class AtmTests {
     @Test
     @DisplayName("отказывать в выдаче средств, если нет подходящих купюр")
     void testWithdrawBanknoteMissing() {
-        assertThat(atm.deposit(Banknote.N1000, 1)).isTrue();
+        assertThat(atm.cashDeposit(Banknote.N1000, 1)).isTrue();
         assertThat(atm.withdraw(500)).isNull();
     }
 
     @Test
     @DisplayName("успешно выдавать сумму минимальным количеством купюр")
     void testWithdraw() {
-        atm.deposit(Banknote.N100, 1);
+        atm.cashDeposit(Banknote.N100, 1);
         var banknotes = atm.withdraw(300);
         assertThat(banknotes).isNotNull();
         assertThat(banknotes.stream()
@@ -63,6 +60,6 @@ public class AtmTests {
                 .collect(Collectors.toList()))
                 .asList()
                 .containsExactlyInAnyOrder(200, 100);
-        assertThat(atm.info()).isEqualTo(0);
+        assertThat(atm.infoPrintAtm()).isEqualTo(0);
     }
 }
