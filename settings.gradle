@@ -2,10 +2,15 @@ rootProject.name = 'otus_java_2023_04'
 include 'hw01-gradle'
 include 'w02-gradle'
 include 'hw-03'
+include 'hw-04-gradle'
 include 'hw05-gradle'
 include 'hw07-sp'
 include 'hw08-io'
+include 'hw10-jpql'
 include 'hw11-cache'
+include 'hw13-di'
+include 'hw11-cache'
+include 'hw15-thread'
 
 
 
